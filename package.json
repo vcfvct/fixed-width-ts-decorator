@@ -1,8 +1,10 @@
 {
   "name": "fixed-width-ts-decorator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fixed width file handler with TypeScript Decorator",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "jest --coverage",
     "lint": "eslint --ext .ts src/",
@@ -25,7 +27,15 @@
     "type": "git",
     "url": "git+https://github.com/vcfvct/fixed-width-ts-decorator.git"
   },
+  "keywords": [
+    "typescirpt",
+    "decorator",
+    "fixed-width"
+  ],
   "homepage": "https://github.com/vcfvct/fixed-width-ts-decorator#readme",
+  "bugs": {
+    "url": "https://github.com/vcfvct/fixed-width-ts-decorator/issues"
+  },
   "author": "Han Li",
   "license": "MIT",
   "dependencies": {
