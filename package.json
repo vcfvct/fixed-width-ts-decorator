@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest --coverage",
-    "compile": "rm -rf ./tsc-dist/* && tsc",
-    "lint": "eslint --ext .ts src/"
+    "lint": "eslint --ext .ts src/",
+    "build": "tsc -d -p ."
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
