@@ -5,7 +5,7 @@ This lib provide decorator for fixed width file so that the domain class and spe
 `npm i fixed-width-ts-decorator`
 
 ## Example
-This lib relies on [reflect-metadata](https://github.com/rbuckton/reflect-metadata).
+This lib uses [reflect-metadata](https://github.com/rbuckton/reflect-metadata) for Meta programming.
 
 ### Model definition
 
