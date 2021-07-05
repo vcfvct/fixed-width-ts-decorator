@@ -1,6 +1,6 @@
 {
   "name": "fixed-width-ts-decorator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Fixed width file handler with TypeScript Decorator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
