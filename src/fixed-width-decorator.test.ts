@@ -18,8 +18,11 @@ describe('fixed width file test', () => {
       return trans;
     });
     expect(rs.length).toBe(4);
-    expect(rs[0].receiverId).toBe('vcfvct');
+    expect(rs[0].taxAmount).toBe(1234.5);
     expect(rs[0].clientId).toBe('20000');
+    expect(rs[0].paymentAmount).toBe(1234.56);
+    expect(rs[0].paymentTimeStamp).toBe(1623943217450);
+    expect(rs[3].paymentAmount).toBe(1.235);
   });
 
   test('should convert data to object via static method', () => {
@@ -29,7 +32,8 @@ describe('fixed width file test', () => {
       return trans;
     });
     expect(rs.length).toBe(4);
-    expect(rs[0].receiverId).toBe('vcfvct');
+    expect(rs[1].taxAmount).toBe(123.45);
+    expect(rs[2].taxAmount).toBe(12.35);
     expect(rs[0].clientId).toBe('20000');
   });
 });

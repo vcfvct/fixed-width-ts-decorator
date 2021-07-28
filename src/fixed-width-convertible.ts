@@ -1,4 +1,4 @@
-import { fixedWidthMetadataKey, FixedWidthOptions, fixedWidthVariableKey } from './fixed-width-decorator';
+import { DataType, fixedWidthMetadataKey, FixedWidthOptions, fixedWidthVariableKey } from './fixed-width-decorator';
 
 export abstract class FixedWidthConvertible {
   convertFixedWidth(line: string): void {
@@ -9,7 +9,15 @@ export abstract class FixedWidthConvertible {
     const fields = Reflect.getMetadata(fixedWidthVariableKey, target.constructor, fixedWidthVariableKey);
     for (const field of fields) {
       const options: FixedWidthOptions = Reflect.getMetadata(fixedWidthMetadataKey, target, field);
-      (target as any)[field] = line.substring(options.start, options.start + options.width).trim();
+      const value = line.substring(options.start, options.start + options.width).trim();
+      (target as any)[field] = value;
+      if (options.format) {
+        if (options.format.type === DataType.Integer) {
+          (target as any)[field] = parseInt(value);
+        } else if (options.format.type === DataType.Float) {
+          (target as any)[field] = Number(parseFloat(value).toFixed(options.format.precision || 2));
+        }
+      }
     }
     return target;
   }
