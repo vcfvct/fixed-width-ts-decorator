@@ -6,7 +6,7 @@ export abstract class FixedWidthConvertible {
   }
 
   static convertFixedWidth<T extends Record<string, any>>(line: string, target: T): T {
-    const fields = Reflect.getMetadata(fixedWidthVariableKey, target.constructor, fixedWidthVariableKey);
+    const fields = this.getAllFields(target.constructor);
     for (const field of fields) {
       const options: FixedWidthOptions = Reflect.getMetadata(fixedWidthMetadataKey, target, field);
       const value = line.substring(options.start, options.start + options.width).trim();
@@ -20,6 +20,18 @@ export abstract class FixedWidthConvertible {
       }
     }
     return target;
+  }
+
+  /**
+   * @param clz the class/constructor
+   * @returns the fields decorated with @FixedWidth all the way up the prototype chain.
+   */
+  static getAllFields(clz: Record<string, any>): string[] {
+    if(!clz) return [];
+    const fields: string[] | undefined = Reflect.getMetadata(fixedWidthVariableKey, clz, fixedWidthVariableKey);
+    // get `__proto__` and (recursively) all parent classes
+    const rs = new Set([...(fields || []), ...this.getAllFields(Object.getPrototypeOf(clz))]);
+    return Array.from(rs);
   }
 }
 

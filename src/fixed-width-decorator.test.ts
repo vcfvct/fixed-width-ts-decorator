@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { FixedWidthConvertible } from './fixed-width-convertible';
+import { ChildTransaction } from './scripts/ChildTransaction';
 import { Transaction } from './scripts/Transaction';
 
 describe('fixed width file test', () => {
@@ -35,5 +36,22 @@ describe('fixed width file test', () => {
     expect(rs[1].taxAmount).toBe(123.45);
     expect(rs[2].taxAmount).toBe(12.35);
     expect(rs[0].clientId).toBe('20000');
+    // should not have child class field
+    expect((rs[0] as any).paymentId).toBeUndefined();
   });
+
+  test('should get Field from parent class', () => {
+    const rs: Array<ChildTransaction> = lines.map(line => {
+      const trans = new ChildTransaction();
+      FixedWidthConvertible.convertFixedWidth(line, trans);
+      return trans;
+    });
+    expect(rs.length).toBe(4);
+    // should have parent class fields
+    expect(rs[1].taxAmount).toBe(123.45);
+    expect(rs[2].taxAmount).toBe(12.35);
+    expect(rs[0].clientId).toBe('20000');
+    expect(rs[0].paymentId).not.toBeUndefined();
+  });
+
 });
