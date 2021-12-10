@@ -7,7 +7,7 @@ export class Transaction extends FixedWidthConvertible {
 
   @FixedWidth({ start: 5, width: 40 })
   parentName: string;
-  
+
   @FixedWidth({ start: 45, width: 40, format: { type: DataType.Float } })
   taxAmount: number;
 
@@ -31,8 +31,6 @@ export class Transaction extends FixedWidthConvertible {
   @FixedWidth({ start: 145, width: 40 })
   userId: string;
 
-  @FixedWidth({ start: 225, width: 40 })
-  paymentId: string;
   // other non-decorated fields
   otherField: string;
 }

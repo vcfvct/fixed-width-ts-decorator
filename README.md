@@ -7,6 +7,8 @@ This lib provide decorator for fixed width file so that the domain class and spe
 ## Example
 This lib uses [reflect-metadata](https://github.com/rbuckton/reflect-metadata) for Meta programming.
 
+Inheritance is supported that fields decorated in parent classes will also be included/processed.
+
 ### Model definition
 
 ```typescript
@@ -17,7 +19,7 @@ export class Transaction extends FixedWidthConvertible {
 
   @FixedWidth({ start: 5, width: 40 })
   parentName: string;
-  
+
   @FixedWidth({ start: 45, width: 40, format: { type: DataType.Float } })
   taxAmount: number;
 
