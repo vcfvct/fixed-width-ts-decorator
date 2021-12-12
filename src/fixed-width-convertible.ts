@@ -28,7 +28,7 @@ export abstract class FixedWidthConvertible {
    */
   static getAllFields(clz: Record<string, any>): string[] {
     if(!clz) return [];
-    const fields: string[] | undefined = Reflect.getMetadata(fixedWidthVariableKey, clz, fixedWidthVariableKey);
+    const fields: string[] | undefined = Reflect.getMetadata(fixedWidthVariableKey, clz);
     // get `__proto__` and (recursively) all parent classes
     const rs = new Set([...(fields || []), ...this.getAllFields(Object.getPrototypeOf(clz))]);
     return Array.from(rs);

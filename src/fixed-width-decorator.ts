@@ -5,10 +5,12 @@ export const fixedWidthVariableKey = Symbol('fixedWidth:variable');
 
 export function FixedWidth(options: FixedWidthOptions): any {
   return function(target: any, propertyKey: string | symbol) {
-    if (!Reflect.hasOwnMetadata(fixedWidthVariableKey, target.constructor, fixedWidthVariableKey)) {
-      Reflect.defineMetadata(fixedWidthVariableKey, [], target.constructor, fixedWidthVariableKey);
+    if (!Reflect.hasOwnMetadata(fixedWidthVariableKey, target.constructor)) {
+      // put field list on the class.
+      Reflect.defineMetadata(fixedWidthVariableKey, [], target.constructor);
     }
-    Reflect.getOwnMetadata(fixedWidthVariableKey, target.constructor, fixedWidthVariableKey).push(propertyKey);
+    Reflect.getOwnMetadata(fixedWidthVariableKey, target.constructor).push(propertyKey);
+    // put options on the class's propertyKey property.
     Reflect.defineMetadata(fixedWidthMetadataKey, options, target, propertyKey);
   };
 }
